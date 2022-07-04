@@ -1,0 +1,306 @@
+#-----------------------------------------------------------------
+Assignment 02
+
+#-----------------------------------------------------------------
+Purpose:
+
+  * Demonstrate ability to write some simple C functions
+      for Euler rotation, perspective projection, and
+      rehomogenization.
+
+#-----------------------------------------------------------------
+Background:
+
+  * All the mathematics you need is outlined in the Euler
+      Rotation and Perspective Projection handouts on Canvas.
+
+#-----------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_02_dalioba.zip from Canvas.
+
+  2. Unzip this file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to YOUR NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_02_abc1234' but with YOUR NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.  There's a Template directory that
+     has some files in it.  Move them up one level into the
+     'hmwk_02_abc1234' directory.
+
+  5. Change the header lines in the files model.c and
+      transforms.c.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD (all digits!).
+
+  6. Now edit the source files and put the proper code in each of
+      the TODO spots.  (There's a list of these spots in the Hints
+      section below.)
+
+  7. After you're done with that, make and run thusly,
+
+    $ make clean
+    rm -f *.o transformsTest render
+    $ make
+    gcc -g -Wall -Wextra -fsanitize=address -fsanitize=leak -static-libasan -o transformsTest matrix.c transforms.c transformsTest.c -lm
+    gcc -g -Wall -Wextra -fsanitize=address -fsanitize=leak -static-libasan -o render matrix.c model.c parameters.c render.c transforms.c -lm
+    $ ./transformsTest
+    //-----------------------------------------------------------------
+
+    //-- Test suite  0 ---------
+    //  World subset    : (-16, -12) .. (16, 12)
+    //  Screen space    : (320, 240)
+    //  Camera position : (0, 0, 27.5)
+                 160             130               0               1
+                 196             168               0               1
+                 244             218               0               1
+                 253             120               0               1
+                 183             154               0               1
+
+    .
+    .
+    .
+
+                 678             589               0               1
+                 749             655               0               1
+                 533             441               0               1
+                 640             550               0               1
+                 761             673               0               1
+
+    //-- Test suite  8 ---------
+    //  World subset    : (-16, -12) .. (16, 12)
+    //  Screen space    : (1000, 750)
+    //  Camera position : (0, 0, 110)
+                 500             406               0               1
+                 598             505               0               1
+                 702             610               0               1
+                 783             375               0               1
+                 564             472               0               1
+                 666             574               0               1
+                 749             655               0               1
+                 532             439               0               1
+                 632             540               0               1
+                 738             646               0               1
+
+    //-----------------------------------------------------------------
+    $
+
+  8. I've edited the output here for length.  The complete results
+      are shown in the file Results/transformsTest-results.txt.
+      Your results should match EXACTLY.  If they don't, STOP
+      RIGHT HERE and figure out what's wrong.  If this doesn't
+      work perfectly, there's no point going any further.
+
+  9. Once that's working OK, now try running the render tool on
+     one of the examples.  You have to give two arguments to this
+     tool:  (1) the model file and (2) the parameters file.
+     Here's what should happen for this pair of model file and
+     parameters file,
+
+    $ ./render Examples/pyramid-centered.svf Examples/params_01.txt
+    #---------------------------------------
+    # Model "Examples/pyramid-centered.svf"
+    #   5 points, 6 faces
+    #   Limits (-0.4, 0.4), (-0.4, 0.4), (0, 0.7)
+    #   Center (0, 0, 0.35)
+    #   Draw file "Examples/pyramid-centered.sdf"
+    #-- Points -----------------------------
+    v        0.4       -0.4          0
+    v        0.4        0.4          0
+    v       -0.4        0.4          0
+    v       -0.4       -0.4          0
+    v          0         -0        0.7
+    #-- Faces ------------------------------
+    f    1    3    0
+    f    0    4    1
+    f    1    4    2
+    f    2    4    3
+    f    4    0    3
+    f    1    2    3
+    #---------------------------------------
+    #---------------------------------------
+    # Parameters "Examples/params_01.txt"
+    #  Euler angles    : phi 45°, theta 0°, psi 0°
+    #  World subset    : (-1.6, -1.2) .. (1.6, 1.2)
+    #  Screen space    : (640, 480)
+    #  Camera position : (0, 0, 10)
+    #---------------------------------------
+    #---------------------------------------
+    # Model "Examples/pyramid-centered.svf"
+    #   5 points, 6 faces
+    #   Limits (-0.4, 0.4), (-0.4, 0.4), (0, 0.7)
+    #   Center (0, 0, 0.35)
+    #   Draw file "Examples/pyramid-centered.sdf"
+    #-- Points -----------------------------
+    v        0.4 -0.0353553   -0.18033
+    v        0.4    0.53033   0.385355
+    v       -0.4    0.53033   0.385355
+    v       -0.4 -0.0353553   -0.18033
+    v          0  -0.247487   0.597487
+    #---------------------------------------
+
+     This output is for a run of the render tool using the model
+     Examples/pyramid-centered.svf (the .svf extension means
+     Simple Vertex / Face format file).
+
+     The parameters file was Examples/params_01.txt.  (The
+     parameters file has the values of the World Space Subset, the
+     Screen Space size, the Euler Rotation angles, and the camera
+     position.  We keep the model information and the parameters
+     information in separate files so we can more easily render
+     the same model with different parameters.)
+
+     Since everything worked out OK, an output file will be
+     created, Examples/pyramid-centered.sdf.  The output file
+     has the same base name as the model file, but its extension
+     is .sdf (meaning Simple Display Format).  The .sdf files can
+     be viewed use the previously distributed Display tool.
+
+ 10. The results of running the reference solution using each
+     pair of model and parameters file are given in the Results/
+     directory.  Ensure that you get the same results for each
+     run.  Look at the resulting .sdf file using the Display tool.
+
+#-----------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_02_abc1234' directory (with 'abc1234'
+changed to YOUR NetID and with your model.c and transforms.c
+files in it) and submit this zipfile on Canvas as your results for
+this assignment.
+
+All your zipfile should include is a directory with two files in
+it, model.c and transforms.c (did you update the headers correctly
+in the source files?).
+
+Do NOT include any other files in the directory.
+
+#-----------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and runs correctly.  You should
+     not get ANY warnings or errors when you compile.  ALWAYS
+     compile your code with -Wall and -Wextra and deal with ANY
+     warnings or errors that are identified.  ALWAYS compile your
+     code with -fsanitize=leak and -fsanitize=address and deal
+     with ANY warnings or errors reported.
+
+     Generating warnings or errors, not compiling, not running,
+     core dumping, crashing, going into an infinite loop, getting
+     the wrong answers, getting memory errors ... will earn you
+     ZERO points.
+
+     Ensure your test results match those given in the Results/
+     subdirectory.  Not matching EXACTLY means you are not
+     performing the transformations correctly.  You will not get
+     any credit for malfunctioning transforms.
+
+     ('EXACTLY' means character-by-character the same in the
+      output.  No differences in values.  Use diff to ensure that
+      your output really does match EXACTLY.)
+
+  2. Ensure that you update the three header lines in the source
+     files with YOUR name (family name first, then a comma, then
+     your personal name), YOUR NetID, and the date you edit the
+     file, in the format YYYY-MM-DD (all digits!).
+
+     Not updating the header lines properly will cost you points.
+
+  3. This is not a large assignment.  There are only a few spots
+      where any new code has to be written.  These spots  are all
+      marked with TODO comments.
+
+        model.c:111:      // TODO:  Update model->xMin if the just-read point's X ...
+        model.c:114:      // TODO:  Update model->xMax if the just-read point's X ...
+        model.c:117:      // TODO:  Update model->yMin if the just-read point's Y ...
+        model.c:120:      // TODO:  Update model->yMax if the just-read point's Y ...
+        model.c:123:      // TODO:  Update model->zMin if the just-read point's Z ...
+        model.c:126:      // TODO:  Update model->zMax if the just-read point's Z ...
+        model.c:159:      // TODO: Compute model->xCenter using model->xMax and ...
+        model.c:162:      // TODO: Compute model->yCenter using model->yMax and ...
+        model.c:165:      // TODO: Compute model->zCenter using model->zMax and ...
+        model.c:241:      // TODO: Use translateMatrix() to compute the proper ...
+        model.c:245:      // TODO: Use rotateXMatrix() to compute the proper "rotation ...
+        model.c:248:      // TODO: Use rotateYMatrix() to compute the proper "rotation ...
+        model.c:251:      // TODO: Use rotateZMatrix() to compute the proper "rotation ...
+        model.c:254:      // TODO: Use translateMatrix() to compute the proper ...
+        model.c:262:      // TODO: Multiply all five of those matrices you just created ...
+        model.c:270:      // TODO: Multiply the composite matrix against the ith point ...
+        transforms.c:37:  // TODO: Construct in "project" the proper matrix to do a ...
+        transforms.c:43:  // TODO: Construct in "xlate" the proper translation matrix ...
+        transforms.c:50:  // TODO: Construct in "scale" the proper scale matrix to ...
+        transforms.c:57:  // TODO: Construct in "xform" the composition of the three ...
+
+      In the reference solution, these spots cost only,
+
+        model.c:111:      --> 1 line of code
+        model.c:114:      --> 1 line of code
+        model.c:117:      --> 1 line of code
+        model.c:120:      --> 1 line of code
+        model.c:123:      --> 1 line of code
+        model.c:126:      --> 1 line of code
+        model.c:159:      --> 1 line of code
+        model.c:162:      --> 1 line of code
+        model.c:165:      --> 1 line of code
+        model.c:241:      --> 1 line of code
+        model.c:245:      --> 1 line of code
+        model.c:248:      --> 1 line of code
+        model.c:251:      --> 1 line of code
+        model.c:254:      --> 1 line of code
+        model.c:262:      --> 4 lines of code
+        model.c:270:      --> 2 lines of code
+        transforms.c:37:  --> 3 lines of code
+        transforms.c:43:  --> 1 line of code
+        transforms.c:50:  --> 4 lines of code
+        transforms.c:57:  --> 2 lines of code
+
+      for a grand total of 30 lines of code.  Easy!
+
+      (Remember that you might take a bit more or fewer lines of
+       code depending on how you write / format your code, so
+       don't freak out if you don't get exactly these counts;
+       they're just guidelines.)
+
+  4. Ensure your submission is packaged EXACTLY as described
+      above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_02_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_02_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your files should be in that directory.  The files should
+         be named model.c and transforms.c.
+
+     Submissions in the wrong format score ZERO points.
+
+  5. Your source files are going to be tried against another test
+     file when it's evaluated for credit.  You DEFINITELY need to
+     make some test cases of your own to ensure that your
+     functions are working properly.
+
+  6. After you submit your zip file on Canvas, download it from
+     Canvas into an empty directory, unzip it, and check that your
+     submission is in the proper format, that the program runs and
+     prints the correct output, that you updated the header lines
+     correctly, that there are only two files in the submitted
+     directory, that they are named correctly, and so forth.
+
+  7. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#-----------------------------------------------------------------

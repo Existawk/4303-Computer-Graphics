@@ -1,0 +1,137 @@
+#-----------------------------------------------------------------
+Assignment 00
+
+#-----------------------------------------------------------------
+Purpose:
+
+  * Demonstrate ability to run a simple Python3 program that
+      displays SDF files.
+
+  * Demonstrate ability to change two frickin' lines of code in
+      that simple Python3 program.
+
+  * Demonstrate ability to take a screenshot properly.  (No,
+      really;  for some persons, this is harder than it sounds. :)
+
+#-----------------------------------------------------------------
+Background:
+
+  * The Display tool is in the Modules > Tools section on Canvas.
+
+#-----------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_00_dalioba.zip from Canvas.
+
+  2. Unzip this file somewhere convenient.
+
+  3. Surprise!  The only file in the directory is this HMWK_00.txt
+      set of instructions.
+
+  4. Download Display.zip from the Modules > Tools section on
+      Canvas.
+
+  5. Unzip this file somewhere convenient.
+
+  6. Look in the Display/ directory and see that there are a
+      number of files, including a handy-dandy README.txt.  Read
+      that file.
+
+  7. Change the background color of the canvas by editing line 40
+      in Dislay/myGraphics.py.  Right now the color is a neutral
+      grey, #C0C0C0.  Change this color so that it is NOT a grey,
+      white, or black color.  (Remember, the lines are drawn in
+      black and they need to be clearly visible against the
+      background.)
+
+  8. Change the NetID on line 114 from 'dalioba' to YOUR NetID.
+      (Remember that your NetID is three letters followed by four
+      or five digits, so it'll be something like 'abc1234'.)
+
+  9. Run the Display tool, display the 'test.sdf' file and take a
+      screenshot of the Display tool window showing off your
+      spiffy new background color and personalized message.
+
+      The screenshot should be similar to the example in the
+      Display tool directory, though it will of course show YOUR
+      background color and YOUR NetID.
+
+      The screenshot MUST be in PNG (Portable Network Graphics)
+      format.
+
+      Trim the screenshot so that it shows ONLY the Display tool
+      window, just as the example screenshot does.  (I am not
+      interested in anything else that you keep on your desktop.
+      Really. :)
+
+#-----------------------------------------------------------------
+Submission:
+
+Name your screenshot 'hmwk_00_abc1234.png', but with YOUR NetID in
+the place of 'abc1234' and submit this image file on Canvas as
+your results for this assignment.
+
+The image file MUST be in PNG (Portable Network Graphics format)!
+
+Different OSes have a history of mucking with screenshots and file
+formats, so ENSURE that your screenshot is actually a PNG file and
+not some other format.  If your screenshot is not in standard
+Portable Network Graphics format, you get ZERO credit for it, so
+be careful!
+
+#-----------------------------------------------------------------
+Hints:
+  1. The background color for the canvas is specified using HTML
+      color notation in hex format.  The color is represented with
+      a # symbol followed by three two-digit hex numbers, for a
+      total of six hex digits.
+
+      The first two digits after the # represent the RED component
+      of the color.  The second two digits represent the GREEN
+      component of the color.  The last two digits represent the
+      BLUE component.
+
+      If the three pairs of digits are the same (or even very
+      close in value) to each other, the color will be a neutral
+      grey of some intensity.  If the numbers are relatively
+      small, the grey color will be closer to black (#000000).
+      The bigger the numbers get, the closer to white (#FFFFFF)
+      the grey color will appear.
+
+      Pure red is #FF0000.  Pure green is #00FF00.  Pure blue is
+      #0000FF.
+
+      You want your background color to have a non-grey tint to
+      it, so make at least one of the three numbers different
+      enough from the other two.
+
+      You want your background color to be on the lighter side so
+      the drawn black lines stand out, so make the numbers larger
+      rather than smaller (which would be darker).
+
+      For example, #FFC0CB is light pink color.  It has a red
+      component of FF, a green component of C0, and blue is CB.
+
+      Notice that the red component is larger enough than the
+      green and blue components to give this color a reddish tint.
+      All three components are large enough to make the color an
+      overall lighter shade so the black lines stand out.
+
+      Experiment a bit to get you own nice shade.  DO NOT USE
+      #FFC0CB!  If you use #FFC0CB, you will get ZERO credit.
+
+      Geez, spend a few moments and pick out your OWN color.
+
+  2. After you submit your image file on Canvas, download it from
+     Canvas into an empty directory and check that your image
+     shows a different, non-grey, white, or black background and
+     YOUR NetID.  Ensure that your background color is NOT
+     #FFC0CB.  Ensure that that your screenshot really is a
+     standard Portable Network Graphics file.  Ensure that your
+     screenshot is properly named.
+
+  3. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#-----------------------------------------------------------------

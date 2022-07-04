@@ -1,0 +1,11 @@
+# World space subset -- xmin, ymin, xmax, ymax
+w -1.6  -1.2  1.6  1.2
+
+# Screen space size -- width, height IN PIXELS!
+s 800  600
+
+# Euler rotation angles -- phi, theta, psi IN DEGREES!
+r 0.0  22.5  -12.25
+
+# Camera position along Z axis -- d
+d 14.0
